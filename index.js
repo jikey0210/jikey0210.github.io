@@ -6,12 +6,17 @@ const yesBtn = document.querySelector(".js-yes-btn");
 const noBtn = document.querySelector(".js-no-btn");
 
 // /change the postion of no button
-noBtn.addEventListener("mouseover", () => {
-  const randomX = Math.floor(Math.random() * 80); // Smaller range
-  const randomY = Math.floor(Math.random() * 80);
-  noBtn.style.left = `${randomX}%`;
-  noBtn.style.top = `${randomY}%`;
+const noBtn = document.querySelector('.js-no-btn');
+
+noBtn.addEventListener('mouseenter', () => {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
 });
+
 
 
 // yes button functionality
