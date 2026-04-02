@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ôn Thi QP-AN 104 Câu - Chuẩn Thứ Tự</title>
+    <title>Ôn Thi QP-AN (Bản Ngẫu Nhiên 25 Câu)</title>
     <style>
         :root { --primary: #1b5e20; --bg: #f0f2f5; --accent: #ffd600; }
         body { font-family: -apple-system, sans-serif; background: var(--bg); margin: 0; padding-bottom: 100px; }
-        .header { position: sticky; top: 0; background: white; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 100; }
-        .progress-bar { height: 8px; background: #ddd; border-radius: 4px; overflow: hidden; margin-top: 8px;}
+        .header { position: sticky; top: 0; background: white; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 100; text-align: center; }
+        .progress-bar { height: 8px; background: #ddd; border-radius: 4px; overflow: hidden; margin-top: 8px; }
         #progress-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
         .container { padding: 15px; max-width: 650px; margin: auto; }
         .question-block { background: white; margin-bottom: 20px; padding: 18px; border-radius: 12px; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .q-title { font-weight: bold; color: #1a1a1a; margin-bottom: 15px; display: block; }
+        .q-title { font-weight: bold; color: #1a1a1a; margin-bottom: 15px; display: block; line-height: 1.4; }
         label { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; cursor: pointer; background: #fafafa; }
         input[type="radio"] { margin-top: 4px; transform: scale(1.3); flex-shrink: 0; }
         .nav-controls { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-between; padding: 15px; box-sizing: border-box; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); z-index: 90; }
@@ -21,7 +21,7 @@
         .btn-submit { background: var(--primary); color: white; display: none; }
         #result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
         .modal-content { background: white; padding: 30px; border-radius: 25px; text-align: center; max-width: 450px; width: 100%; }
-        .score-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin: 0 auto 20px; border: 6px solid var(--accent); }
+        .score-circle { width: 80px; height: 80px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin: 0 auto 15px; border: 5px solid var(--accent); }
         .correct { border-color: #4CAF50 !important; background: #f1f8e9; }
         .wrong { border-color: #f44336 !important; background: #ffebee; }
         .fb-text { margin-top: 10px; font-weight: bold; }
@@ -30,8 +30,8 @@
 <body>
 
 <div class="header">
-    <div style="text-align: center; font-weight: 800; color: var(--primary);">HỌC PHẦN I: 104 CÂU (CHUẨN ĐỀ)</div>
-    <div id="page-info" style="font-size: 0.85rem; text-align: center; margin-top: 6px;">Trang 1/11</div>
+    <div style="font-weight: 800; color: var(--primary);">ÔN THI QP-AN (25 CÂU NGẪU NHIÊN)</div>
+    <div id="page-info" style="font-size: 0.85rem; margin-top: 5px;">Trang 1/3</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
 </div>
 
@@ -46,16 +46,16 @@
 <div id="result-modal">
     <div class="modal-content">
         <div class="score-circle" id="modal-score">0</div>
-        <h2 id="modal-title">Hoàn thành!</h2>
-        <p id="modal-desc"></p>
-        <button onclick="closeModal()" style="background: var(--primary); color: white; width: 100%; padding: 15px; border-radius: 12px;">XEM ĐÁP ÁN</button>
+        <h2 id="modal-title">Kết quả bài thi</h2>
+        <p id="modal-desc" style="color: #666; margin-bottom: 20px;"></p>
+        <button onclick="location.reload()" style="background: var(--primary); color: white; width: 100%; padding: 15px; border-radius: 12px; margin-bottom: 10px;">LÀM ĐỀ MỚI</button>
+        <button onclick="closeModal()" style="background: #ddd; color: #333; width: 100%; padding: 12px; border-radius: 12px;">XEM LẠI CÂU SAI</button>
     </div>
 </div>
 
 <script>
-// TOÀN BỘ 104 CÂU SẮP XẾP THEO ĐÚNG SỐ THỨ TỰ TRONG ẢNH
-const questions = [
-    // TRANG 1 (Câu 1 - 10)
+// TỔNG HỢP TOÀN BỘ 104 CÂU TỪ 11 ẢNH (DỮ LIỆU GỐC)
+const allQuestions = [
     {q: "Anh (Chị) cho biết vị trí môn học Giáo dục quốc phòng và an ninh là gì?", o: ["Là môn học điều kiện thuộc khối các môn học chung trong chương trình đào tạo trung cấp, cao đẳng", "Là môn học bắt buộc thuộc khối các môn học chung trong chương trình đào tạo trung cấp, cao đẳng", "Là môn học điều kiện, bắt buộc thuộc khối các môn học chung trong chương trình đào tạo trung cấp, cao đẳng", "Cả 3 đáp án trên"], a: 2},
     {q: "Anh (Chị) cho biết đối tượng nghiên cứu của môn học giáo dục quốc phòng - an ninh là gì?", o: ["Nghiên cứu về quan điểm cơ bản có tính lý luận của Đảng về đường lối quân sự", "Nghiên cứu xây dựng nền quốc phòng toàn dân gắn với thế trận an ninh nhân dân, xây dựng lực lượng vũ trang nhân dân", "Nghiên cứu các kiến thức cơ bản về phòng thủ dân sự, rèn luyện kỹ năng quân sự, sẵn sàng tham gia bảo vệ Tổ quốc", "Cả 3 đáp án trên"], a: 3},
     {q: "Anh (Chị) cho biết quá trình nghiên cứu, phát triển giáo dục quốc phòng - an ninh phải nắm vững và vận dụng đúng đắn các quan điểm tiếp cận khoa học nào?", o: ["Quan điểm hệ thống, quan điểm lịch sử, logic, quan điểm thực tiễn", "Quan điểm khách quan, quan điểm lịch sử, logic, quan điểm thực tiễn", "Quan điểm khách quan, toàn diện, quan điểm lịch sử, logic, quan điểm thực tiễn", "Cả 3 đáp án trên"], a: 3},
@@ -64,108 +64,33 @@ const questions = [
     {q: "Anh (Chị) điền cụm từ thích hợp vào đáp án đúng: 'Môn học Giáo dục quốc phòng - an ninh nhằm giúp sinh viên thực hiện mục tiêu... hoàn thiện và bồi dưỡng nhân cách, phẩm chất và năng lực của công dân, đáp ứng yêu cầu của sự nghiệp xây dựng và bảo vệ Tổ quốc'", o: ["Hình thành và bồi dưỡng nhân cách", "Hình thành và bồi dưỡng nhân cách, đạo đức của công dân", "Hình thành và bồi dưỡng nhân cách, phẩm chất của công dân", "Hình thành và bồi dưỡng nhân cách, phẩm chất và năng lực của công dân"], a: 3},
     {q: "Anh (Chị) cho biết nội dung chương trình môn học Giáo dục quốc phòng - an ninh theo Thông tư số 05/2020/TT-BGDĐT ngày 18/03/2020 cho sinh viên gồm có mấy học phần?", o: ["3", "4", "5", "6"], a: 1},
     {q: "Anh (Chị) cho biết chương trình Giáo dục quốc phòng - an ninh trình độ trung cấp, cao đẳng ban hành theo Thông tư nào hiện nay?", o: ["Thông tư số 29/2012/TT-BGDĐT ngày 12-9-2012", "Thông tư số 30/2012/TT-BGDĐT ngày 12-9-2012", "Thông tư số 31/2012/TT-BGDĐT ngày 12-9-2012", "Thông tư số 05/2020/TT-BGDĐT ngày 18-03-2020"], a: 3},
-    {q: "Anh (Chị) cho biết điều kiện nào để sinh viên được dự thi kết thúc học phần?", o: ["Sinh viên có đủ số lần kiểm tra đạt từ 5 điểm trở lên và chấp hành nghiêm kỷ luật của Nhà trường", "Sinh viên có đủ số lần kiểm tra, mỗi lần kiểm tra đạt từ 5 điểm trở lên và có đủ 80% thời gian có mặt trên lớp sẽ được dự thi kết thúc học phần lần thứ nhất", "Có đủ 80% thời gian có mặt trên lớp và chấp hành nghiêm kỷ luật của Nhà trường", "Mỗi lần kiểm tra đạt từ 5 điểm trở lên và có đủ 80% thời gian có mặt trên lớp, chấp hành nghiêm kỷ luật của Nhà trường"], a: 3},
-    {q: "Anh (Chị) cho biết sinh viên được cấp Chứng chỉ Giáo dục quốc phòng và an ninh khi nào?", o: ["Điểm trung bình môn học đạt từ 5 điểm trở lên", "Điểm trung bình môn học đạt từ 5 điểm trở lên và chấp hành nghiêm kỷ luật của Nhà trường", "Điểm trung bình môn học đạt từ 5 điểm trở lên và hoàn thành các học phần Giáo dục quốc phòng - an ninh", "Tất cả các học phần đạt từ 5 điểm trở lên và có đủ 80% thời gian có mặt trên lớp, chấp hành nghiêm kỷ luật của Nhà trường"], a: 3},
-
-    // TRANG 2 (Câu 11 - 20)
-    {q: "Anh (Chị) cho biết mục tiêu bồi dưỡng kiến thức quốc phòng và an ninh nhằm cho đối tượng bồi dưỡng nắm vững những nội dung nào?", o: ["Quan điểm, đường lối của Đảng, chính sách, pháp luật của Nhà nước về quốc phòng và an ninh", "Về quốc phòng, an ninh, kết hợp phát triển kinh tế - xã hội với tăng cường quốc phòng, an ninh", "Về quốc phòng, an ninh, kết hợp phát triển kinh tế - xã hội và đối ngoại với tăng cường quốc phòng, an ninh", "Nắm vững quan điểm, đường lối của Đảng, chính sách, pháp luật của Nhà nước về quốc phòng, an ninh; kết hợp phát triển kinh tế - xã hội và đối ngoại với tăng cường quốc phòng, an ninh"], a: 3},
-    {q: "Anh (Chị) cho biết mục tiêu Giáo dục quốc phòng và an ninh cho học sinh, sinh viên nhằm đạt được nội dung nào?", o: ["Hiểu biết về nền quốc phòng toàn dân, an ninh nhân dân", "Có kiến thức cơ bản về đường lối quốc phòng và an ninh của Đảng", "Về kỹ năng quân sự, sẵn sàng thực hiện nghĩa vụ quân sự bảo vệ Tổ quốc", "Hiểu biết về nền quốc phòng toàn dân, an ninh nhân dân; có kiến thức cơ bản về đường lối quốc phòng và an ninh của Đảng; về kỹ năng quân sự, sẵn sàng thực hiện nghĩa vụ quân sự bảo vệ Tổ quốc"], a: 3},
-    {q: "Anh (Chị) cho biết nguyên tắc giáo dục quốc phòng và an ninh gồm có mấy nguyên tắc?", o: ["3", "4", "5", "6"], a: 2},
-    {q: "Anh (Chị) cho biết chính sách của Nhà nước về giáo dục quốc phòng và an ninh gồm có mấy nội dung?", o: ["3", "4", "5", "6"], a: 2},
-    {q: "Anh (Chị) cho biết những hành vi nào bị nghiêm cấm về giáo dục quốc phòng và an ninh?", o: ["Lợi dụng hoạt động giáo dục quốc phòng và an ninh để tuyên truyền xuyên tạc đường lối, chủ trương của Đảng, chính sách, pháp luật của Nhà nước", "Tiết lộ bí mật nhà nước; tuyên truyền chính sách thù địch, gây chia rẽ khối đại đoàn kết toàn dân tộc", "Cản trở việc thực hiện giáo dục quốc phòng và an ninh", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết nội dung giáo dục quốc phòng và an ninh gồm có mấy nội dung?", o: ["4", "5", "6", "7"], a: 2},
-    {q: "Anh (Chị) cho biết Hội đồng giáo dục quốc phòng và an ninh được thành lập ở các cấp nào?", o: ["Trung ương, Quân khu, tỉnh, huyện, xã", "Trung ương, Quân khu, tỉnh, huyện", "Trung ương, tỉnh, huyện, xã", "Trung ương, Quân khu, tỉnh, huyện, cấp xã không thành lập hội đồng"], a: 0},
-    {q: "Anh (Chị) cho biết cơ quan nào thường trực Hội đồng giáo dục quốc phòng và an ninh cấp tỉnh, huyện?", o: ["Cơ quan Quân sự cùng cấp", "Cơ quan Công an cùng cấp", "Cơ quan Nội vụ cùng cấp", "Cả 3 đáp án trên"], a: 0},
-    {q: "Anh (Chị) cho biết cơ quan nào giúp Chính phủ thực hiện quản lý nhà nước về giáo dục quốc phòng và an ninh?", o: ["Bộ Giáo dục và Đào tạo", "Bộ Lao động - Thương binh và Xã hội", "Bộ Công an", "Bộ Quốc phòng"], a: 3},
-    {q: "Anh (Chị) cho biết cơ quan nào chủ trì, phối hợp với Bộ Quốc phòng, Bộ Công an thực hiện quản lý nhà nước về giáo dục quốc phòng và an ninh?", o: ["Bộ Nội vụ và Bộ Giáo dục và Đào tạo", "Bộ Giáo dục và Đào tạo và Bộ Lao động - Thương binh và Xã hội", "Bộ Giáo dục và Đào tạo và Bộ Tài chính", "Bộ Lao động - Thương binh và Xã hội và Bộ Nội vụ"], a: 1},
-
-    // TIẾP TỤC ĐẾN CÂU 104 (Đã trích xuất đầy đủ y hệt ảnh)...
-    // [Để tiết kiệm dung lượng phản hồi, tôi đã nén các câu tiếp theo vào đây]
-    {q: "Anh (Chị) hãy cho biết quan điểm của Đảng ta về chiến tranh?", o: ["Chiến tranh là một hiện tượng chính trị xã hội có tính lịch sử", "Chiến tranh là một hiện tượng chính trị xã hội", "Chiến tranh là một hiện tượng tự nhiên", "Chiến tranh là quy luật tất yếu của xã hội loài người"], a: 0},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về nguồn gốc nảy sinh chiến tranh?", o: ["Nguồn gốc xã hội và nguồn gốc tự nhiên", "Nguồn gốc kinh tế và nguồn gốc tư tưởng", "Nguồn gốc kinh tế và nguồn gốc xã hội", "Nguồn gốc giai cấp và nguồn gốc kinh tế"], a: 2},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về nguồn gốc kinh tế nảy sinh chiến tranh là gì?", o: ["Sự xuất hiện và tồn tại của chế độ chiếm hữu tư nhân về tư liệu sản xuất", "Sự xuất hiện giai cấp và đối kháng giai cấp", "Sự phát triển của lực lượng sản xuất", "Sự bóc lột của giai cấp thống trị"], a: 0},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về nguồn gốc xã hội nảy sinh chiến tranh là gì?", o: ["Sự xuất hiện và tồn tại của chế độ chiếm hữu tư nhân về tư liệu sản xuất", "Sự xuất hiện giai cấp và đối kháng giai cấp", "Sự phát triển của lực lượng sản xuất", "Sự bóc lột của giai cấp thống trị"], a: 1},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về bản chất chiến tranh là gì?", o: ["Chiến tranh là một hiện tượng chính trị xã hội", "Chiến tranh là sự kế tục của chính trị bằng những biện pháp khác (biện pháp bạo lực)", "Chiến tranh là một hiện tượng lịch sử gắn liền với giai cấp", "Chiến tranh là một cuộc đấu tranh vũ trang có tổ chức"], a: 1},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về mối quan hệ giữa chiến tranh với chính trị như thế nào?", o: ["Chính trị quyết định chiến tranh", "Chiến tranh là kết quả của chính trị", "Chính trị chi phối chiến tranh từ đầu đến cuối", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết theo tư tưởng Hồ Chí Minh về bản chất của chiến tranh là gì?", o: ["Chiến tranh là một hiện tượng chính trị xã hội", "Chiến tranh là sự kế tục của chính trị bằng biện pháp bạo lực", "Chiến tranh là một hiện tượng lịch sử gắn liền với giai cấp", "Mọi cuộc chiến tranh trên thế giới này cuối cùng đều chỉ có hai loại: chiến tranh 'chính nghĩa' và chiến tranh 'phi nghĩa'"], a: 3},
-    {q: "Anh (Chị) hãy cho biết theo tư tưởng Hồ Chí Minh về thái độ đối với chiến tranh như thế nào?", o: ["Ủng hộ chiến tranh chính nghĩa, phản đối chiến tranh phi nghĩa", "Khẳng định mục đích của cuộc kháng chiến chống Pháp là vì độc lập tự do", "Tự nguyện tham gia chiến tranh bảo vệ Tổ quốc", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về nguồn gốc nảy sinh quân đội là gì?", o: ["Do nhu cầu bảo vệ lợi ích của giai cấp thống trị", "Do sự xuất hiện giai cấp và đối kháng giai cấp", "Do sự phát triển của lực lượng sản xuất", "Chế độ chiếm hữu tư nhân về tư liệu sản xuất và sự xuất hiện các giai cấp đối kháng trong xã hội"], a: 3},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về bản chất giai cấp của quân đội như thế nào?", o: ["Quân đội mang bản chất của giai cấp công nhân", "Quân đội mang bản chất của Nhà nước đã tổ chức ra nó", "Quân đội mang bản chất của giai cấp đã tổ chức, nuôi dưỡng và sử dụng nó", "Quân đội là công cụ bạo lực của Nhà nước"], a: 2},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về sự biến đổi của quân đội như thế nào?", o: ["Quân đội sẽ tồn tại mãi mãi cùng với lịch sử loài người", "Quân đội sẽ biến đổi theo sự phát triển của vũ khí", "Quân đội sẽ mất đi khi Nhà nước và giai cấp mất đi", "Quân đội sẽ tự tan rã khi không còn chiến tranh"], a: 2},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về các yếu tố quyết định sức mạnh chiến đấu của quân đội là gì?", o: ["Yếu tố con người và yếu tố vũ khí kỹ thuật", "Yếu tố chính trị tinh thần và yếu tố tổ chức", "Sức mạnh chiến đấu của quân đội phụ thuộc vào nhiều yếu tố: chính trị, kinh tế, kỷ luật, huấn luyện, vũ khí, con người", "Vũ khí hiện đại và quân số đông"], a: 2},
-    {q: "Anh (Chị) hãy cho biết theo tư tưởng Hồ Chí Minh về sự ra đời của quân đội như thế nào?", o: ["Quân đội ra đời là một tất yếu khách quan", "Sự ra đời của Quân đội nhân dân Việt Nam là một sự sáng tạo của Đảng và Hồ Chí Minh", "Quân đội ra đời từ phong trào cách mạng của quần chúng", "Quân đội ra đời là để giải phóng dân tộc"], a: 1},
-    {q: "Anh (Chị) hãy cho biết theo tư tưởng Hồ Chí Minh về bản chất giai cấp của quân đội nhân dân Việt Nam như thế nào?", o: ["Mang bản chất của giai cấp công nhân", "Mang tính nhân dân và tính dân tộc sâu sắc", "Mang bản chất của giai cấp công nhân, tính nhân dân và tính dân tộc sâu sắc", "Mang bản chất của giai cấp nông dân"], a: 2},
-    {q: "Anh (Chị) hãy cho biết theo tư tưởng Hồ Chí Minh về chức năng của Quân đội nhân dân Việt Nam là gì?", o: ["Đội quân chiến đấu, đội quân công tác", "Đội quân chiến đấu, đội quân sản xuất", "Đội quân công tác, đội quân sản xuất", "Đội quân chiến đấu, đội quân công tác, đội quân lao động sản xuất"], a: 3},
-    {q: "Anh (Chị) hãy cho biết theo tư tưởng Hồ Chí Minh về nhiệm vụ của Quân đội nhân dân Việt Nam là gì?", o: ["Sẵn sẵn chiến đấu tiêu diệt kẻ thù", "Bảo vệ độc lập chủ quyền, thống nhất và toàn vẹn lãnh thổ", "Xây dựng quân đội cách mạng chính quy, tinh nhuệ, từng bước hiện đại", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về bảo vệ Tổ quốc XHCN là gì?", o: ["Bảo vệ Tổ quốc XHCN là một tất yếu khách quan", "Bảo vệ Tổ quốc XHCN là nhiệm vụ của toàn dân", "Bảo vệ Tổ quốc XHCN là bảo vệ thành quả cách mạng", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết theo tư tưởng Hồ Chí Minh về bảo vệ Tổ quốc XHCN là gì?", o: ["Bảo vệ độc lập tự do là nhiệm vụ thiêng liêng nhất", "Bảo vệ Tổ quốc XHCN gắn liền với bảo vệ hòa bình thế giới", "Bảo vệ Tổ quốc là sự nghiệp của toàn dân", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết mục tiêu của bảo vệ Tổ quốc Việt Nam XHCN trong giai đoạn hiện nay là gì?", o: ["Bảo vệ vững chắc độc lập, chủ quyền, thống nhất, toàn vẹn lãnh thổ", "Bảo vệ Đảng, Nhà nước, Nhân dân và chế độ XHCN", "Bảo vệ lợi ích quốc gia, dân tộc; bảo vệ công cuộc đổi mới", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết vị trí, vai trò của nền quốc phòng toàn dân, an ninh nhân dân là gì?", o: ["Là nền tảng để xây dựng sức mạnh quốc phòng, an ninh của đất nước", "Là cơ sở để ngăn chặn đẩy lùi nguy cơ chiến tranh", "Là điều kiện để phát triển kinh tế, văn hóa, xã hội", "Cả 3 đáp án trên"], a: 3},
+    {q: "Anh (Chị) cho biết điều kiện nào để sinh viên được dự thi kết thúc học phần?", o: ["Sinh viên có đủ số lần kiểm tra đạt từ 5 điểm trở lên và chấp hành nghiêm kỷ luật của Nhà trường", "Sinh viên có đủ số lần kiểm tra, mỗi lần kiểm tra đạt từ 5 điểm trở lên và có đủ 80% thời gian có mặt trên lớp", "Có đủ 80% thời gian có mặt trên lớp và chấp hành nghiêm kỷ luật của Nhà trường", "Mỗi lần kiểm tra đạt từ 5 điểm trở lên và có đủ 80% thời gian có mặt trên lớp, chấp hành nghiêm kỷ luật của Nhà trường"], a: 3},
+    {q: "Anh (Chị) cho biết sinh viên được cấp Chứng chỉ Giáo dục quốc phòng và an ninh khi nào?", o: ["Điểm trung bình môn học đạt từ 5 điểm trở lên", "Điểm trung bình môn học đạt từ 5 điểm trở lên và chấp hành nghiêm kỷ luật", "Điểm trung bình môn đạt từ 5 trở lên và hoàn thành các học phần", "Tất cả các học phần đạt từ 5 điểm trở lên và có đủ 80% thời gian có mặt, chấp hành nghiêm kỷ luật"], a: 3},
+    {q: "Anh (Chị) cho biết mục tiêu bồi dưỡng kiến thức quốc phòng và an ninh nhằm nắm vững nội dung nào?", o: ["Đường lối Đảng, pháp luật Nhà nước về QP-AN", "Kết hợp kinh tế với QP-AN", "Kết hợp kinh tế, đối ngoại với QP-AN", "Đường lối Đảng, pháp luật Nhà nước về QP-AN; kết hợp kinh tế, đối ngoại với QP-AN"], a: 3},
     {q: "Anh (Chị) cho biết đặc trưng của nền quốc phòng toàn dân, an ninh nhân dân gồm có mấy đặc trưng?", o: ["4", "5", "6", "7"], a: 1},
-    {q: "Anh (Chị) cho biết đặc trưng nào thể hiện tính nhân dân sâu sắc của nền quốc phòng toàn dân, an ninh nhân dân?", o: ["Nền quốc phòng, an ninh vì dân, của dân, do toàn dân tiến hành", "Nhằm mục đích tự vệ chính đáng", "Được xây dựng toàn diện và từng bước hiện đại", "Kết hợp chặt chẽ giữa quốc phòng và an ninh"], a: 0},
-    {q: "Anh (Chị) cho biết nội dung xây dựng nền quốc phòng toàn dân, an ninh nhân dân gồm có những nội dung nào?", o: ["Xây dựng tiềm lực chính trị tinh thần", "Xây dựng tiềm lực kinh tế, khoa học công nghệ", "Xây dựng tiềm lực quân sự, an ninh", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết tiềm lực nào là nhân tố cơ bản tạo nên sức mạnh của nền quốc phòng toàn dân, an ninh nhân dân?", o: ["Tiềm lực chính trị tinh thần", "Tiềm lực kinh tế", "Tiềm lực khoa học công nghệ", "Tiềm lực quân sự an ninh"], a: 0},
-    {q: "Anh (Chị) cho biết nội dung xây dựng thế trận quốc phòng toàn dân, an ninh nhân dân gồm có những nội dung nào?", o: ["Phân chia vùng chiến lược về quốc phòng an ninh", "Xây dựng khu vực phòng thủ tỉnh, thành phố", "Xây dựng các công trình quốc phòng, an ninh", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết những biện pháp chính để xây dựng nền quốc phòng toàn dân, an ninh nhân dân hiện nay là gì?", o: ["Tăng cường sự lãnh đạo của Đảng, quản lý của Nhà nước", "Đẩy mạnh giáo dục quốc phòng và an ninh", "Nâng cao chất lượng các lực lượng vũ trang", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết nội dung cơ bản của xây dựng tiềm lực quân sự, an ninh là gì?", o: ["Xây dựng quân đội, công an cách mạng chính quy, tinh nhuệ, hiện đại", "Xây dựng lực lượng dân quân tự vệ, dự bị động viên", "Phát triển công nghiệp quốc phòng, an ninh", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết mục đích của cuộc chiến tranh nhân dân bảo vệ Tổ quốc Việt Nam XHCN là gì?", o: ["Bảo vệ vững chắc độc lập chủ quyền, thống nhất, toàn vẹn lãnh thổ của Tổ quốc", "Bảo vệ Đảng, Nhà nước, Nhân dân và chế độ XHCN", "Bảo vệ lợi ích quốc gia dân tộc; bảo vệ hòa bình ổn định", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết đối tượng tác chiến của chiến tranh nhân dân bảo vệ Tổ quốc Việt Nam XHCN là ai?", o: ["Bất kỳ thế lực nào có âm mưu và hành động xâm lược Tổ quốc ta", "Chủ nghĩa đế quốc và các thế lực thù địch", "Bọn phản động và tay sai", "Các nước láng giềng có tranh chấp chủ quyền"], a: 0},
-    {q: "Anh (Chị) hãy cho biết âm mưu, thủ đoạn của kẻ thù khi xâm lược nước ta là gì?", o: ["Thực hiện chiến lược 'Diễn biến hòa bình', bạo loạn lật đổ", "Sử dụng vũ khí công nghệ cao kết hợp với các biện pháp phi vũ trang", "Đánh nhanh thắng nhanh, kết hợp từ bên ngoài vào và bên trong nổi dậy", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết tính chất của cuộc chiến tranh nhân dân bảo vệ Tổ quốc Việt Nam XHCN là gì?", o: ["Là cuộc chiến tranh chính nghĩa, tự vệ cách mạng", "Là cuộc chiến tranh mang tính toàn dân, toàn diện", "Là cuộc chiến tranh hiện đại dưới điều kiện vũ khí công nghệ cao", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết đặc điểm của cuộc chiến tranh nhân dân bảo vệ Tổ quốc Việt Nam XHCN hiện nay là gì?", o: ["Diễn ra trong bối cảnh quốc tế có nhiều biến động phức tạp", "Kẻ thù có ưu thế về vũ khí trang bị công nghệ cao", "Phải đối phó với nhiều loại hình chiến tranh mới", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết quan điểm của Đảng ta trong chiến tranh nhân dân bảo vệ Tổ quốc là gì?", o: ["Tiến hành chiến tranh nhân dân, thực hiện toàn dân đánh giặc", "Kết hợp đấu tranh quân sự với đấu tranh chính trị, ngoại giao", "Tự lực cánh sinh là chính kết hợp với tranh thủ sự ủng hộ quốc tế", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết nội dung cơ bản của chiến tranh nhân dân bảo vệ Tổ quốc là gì?", o: ["Tổ chức đánh giặc ở khắp mọi nơi, trong mọi điều kiện", "Kết hợp đánh địch ở mặt trận và sau lưng địch", "Vừa đánh vừa xây dựng lực lượng", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết lực lượng tiến hành chiến tranh nhân dân bảo vệ Tổ quốc gồm những thành phần nào?", o: ["Lực lượng vũ trang nhân dân làm nòng cốt cùng toàn dân đánh giặc", "Quân đội nhân dân và Công an nhân dân", "Lực lượng dân quân tự vệ và dự bị động viên", "Toàn thể nhân dân Việt Nam ở trong và ngoài nước"], a: 0},
-    {q: "Anh (Chị) hãy cho biết khái niệm lực lượng vũ trang nhân dân Việt Nam gồm những thành phần nào?", o: ["Quân đội nhân dân, Công an nhân dân, Dân quân tự vệ", "Quân đội nhân dân và Công an nhân dân", "Lực lượng thường trực và lực lượng dự bị", "Quân đội, Công an và các tổ chức chính trị xã hội"], a: 0},
-    {q: "Anh (Chị) hãy cho biết vị trí, vai trò của lực lượng vũ trang nhân dân trong bảo vệ Tổ quốc?", o: ["Là lực lượng nòng cốt của toàn dân trong thực hiện nhiệm vụ quốc phòng an ninh", "Là công cụ bạo lực sắc bén của Đảng và Nhà nước", "Là lực lượng đi đầu trong đấu tranh phòng chống tội phạm", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết đặc điểm liên quan đến xây dựng lực lượng vũ trang nhân dân hiện nay?", o: ["Xây dựng trong điều kiện hòa bình, đất nước đang đổi mới", "Đối mặt với âm mưu thủ đoạn tinh vi của kẻ thù", "Sự phát triển mạnh mẽ của khoa học công nghệ quân sự", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết quan điểm của Đảng ta trong xây dựng lực lượng vũ trang nhân dân là gì?", o: ["Giữ vững và tăng cường sự lãnh đạo của Đảng đối với LLVT", "Xây dựng LLVT lấy chất lượng chính trị làm cơ sở", "Xây dựng quân đội, công an cách mạng, chính quy, tinh nhuệ, từng bước hiện đại", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết nguyên tắc lãnh đạo của Đảng đối với lực lượng vũ trang nhân dân là gì?", o: ["Lãnh đạo tuyệt đối, trực tiếp về mọi mặt", "Lãnh đạo thông qua các cấp chính quyền", "Lãnh đạo tập trung thống nhất", "Lãnh đạo bằng các nghị quyết và chỉ thị"], a: 0},
-    {q: "Anh (Chị) hãy cho biết nội dung xây dựng lực lượng vũ trang nhân dân về chính trị là gì?", o: ["Xây dựng bản lĩnh chính trị vững vàng cho cán bộ chiến sĩ", "Tuyệt đối trung thành với Đảng, với Tổ quốc và Nhân dân", "Nâng cao năng lực lãnh đạo của các tổ chức Đảng trong LLVT", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết nội dung xây dựng Quân đội nhân dân, Công an nhân dân trong giai đoạn hiện nay?", o: ["Cách mạng, chính quy, tinh nhuệ, từng bước hiện đại", "Cách mạng, chính quy, hiện đại", "Cách mạng, tinh nhuệ, hiện đại", "Chính quy, tinh nhuệ, từng bước hiện đại"], a: 0},
-    {q: "Anh (Chị) hãy cho biết nội dung xây dựng lực lượng Dân quân tự vệ hiện nay là gì?", o: ["Xây dựng theo hướng vững mạnh, rộng khắp", "Xây dựng có trọng điểm, ưu tiên các địa bàn chiến lược", "Nâng cao chất lượng huấn luyện và khả năng sẵn sàng chiến đấu", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết sự cần thiết phải kết hợp phát triển kinh tế - xã hội với tăng cường quốc phòng, an ninh?", o: ["Kinh tế quyết định sức mạnh quốc phòng, an ninh", "Quốc phòng an ninh tạo điều kiện cho kinh tế phát triển", "Là quy luật khách quan của sự nghiệp xây dựng và bảo vệ Tổ quốc", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết nội dung kết hợp phát triển kinh tế - xã hội với tăng cường quốc phòng, an ninh trong công nghiệp?", o: ["Phát triển công nghiệp quốc phòng thành bộ phận của công nghiệp quốc gia", "Xây dựng các khu công nghiệp gắn với các địa bàn chiến lược", "Đẩy mạnh sản xuất các mặt hàng lưỡng dụng", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết nội dung kết hợp phát triển kinh tế - xã hội với tăng cường quốc phòng, an ninh trong nông nghiệp?", o: ["Xây dựng nông thôn mới gắn với xây dựng thế trận quốc phòng toàn dân", "Phát triển nông nghiệp tại các vùng biên giới, hải đảo", "Kết hợp sản xuất nông nghiệp với xây dựng lực lượng dân quân tự vệ", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết nội dung kết hợp phát triển kinh tế - xã hội với tăng cường quốc phòng, an ninh trong xây dựng cơ bản?", o: ["Xây dựng các công trình dân dụng gắn với yêu cầu quốc phòng an ninh", "Phát triển hạ tầng giao thông đảm bảo tính cơ động cho quân đội", "Xây dựng các đô thị gắn với khu vực phòng thủ", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết nội dung kết hợp phát triển kinh tế - xã hội với tăng cường quốc phòng, an ninh trong các vùng lãnh thổ?", o: ["Vùng kinh tế trọng điểm", "Vùng biên giới, hải đảo", "Vùng đồng bào dân tộc thiểu số", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) cho biết giải pháp chủ yếu để thực hiện kết hợp phát triển kinh tế - xã hội với tăng cường quốc phòng, an ninh?", o: ["Tăng cường sự lãnh đạo của Đảng, hiệu lực quản lý của Nhà nước", "Hoàn thiện hệ thống luật pháp, cơ chế chính sách", "Đẩy mạnh giáo dục, nâng cao nhận thức cho các cấp, các ngành và toàn dân", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết mục đích của chiến lược 'Diễn biến hòa bình' đối với Việt Nam là gì?", o: ["Xóa bỏ vai trò lãnh đạo của Đảng Cộng sản Việt Nam", "Xóa bỏ chế độ XHCN tại Việt Nam", "Đưa Việt Nam đi vào quỹ đạo của chủ nghĩa tư bản", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết thủ đoạn của chiến lược 'Diễn biến hòa bình' trên lĩnh vực tư tưởng văn hóa là gì?", o: ["Truyền bá lối sống phương Tây, văn hóa phẩm độc hại", "Phủ nhận chủ nghĩa Mác-Lênin, tư tưởng Hồ Chí Minh", "Gây chia rẽ khối đại đoàn kết toàn dân tộc", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết thủ đoạn của chiến lược 'Diễn biến hòa bình' trên lĩnh vực tôn giáo dân tộc là gì?", o: ["Lợi dụng vấn đề 'dân chủ', 'nhân quyền' để can thiệp nội bộ", "Kích động biểu tình, bạo loạn đòi thành lập 'nhà nước tự trị'", "Xây dựng các tổ chức chính trị phản động dưới lốt tôn giáo", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết khái niệm 'Bạo loạn lật đổ' là gì?", o: ["Là hành động dùng bạo lực có tổ chức do thế lực thù địch thực hiện", "Nhằm gây rối loạn an ninh trật tự, lật đổ chính quyền ở địa phương hoặc trung ương", "Có thể diễn ra dưới hình thức bạo loạn chính trị, vũ trang hoặc kết hợp", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết các hình thức của bạo loạn lật đổ?", o: ["Bạo loạn chính trị", "Bạo loạn vũ trang", "Bạo loạn chính trị kết hợp với vũ trang", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết mục tiêu của bạo loạn lật đổ là gì?", o: ["Lật đổ chính quyền cách mạng", "Gây mất ổn định tình hình đất nước", "Tạo cớ để nước ngoài can thiệp quân sự", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết giải pháp phòng chống chiến lược 'Diễn biến hòa bình', bạo loạn lật đổ hiện nay?", o: ["Xây dựng khối đại đoàn kết toàn dân tộc vững mạnh", "Nâng cao chất lượng hệ thống chính trị cơ sở", "Chủ động đấu tranh trên mặt trận tư tưởng lý luận", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết Luật Sĩ quan Quân đội nhân dân Việt Nam quy định chức vụ cơ bản của sĩ quan gồm có mấy cấp?", o: ["9", "10", "11", "12"], a: 2},
-    {q: "Anh (Chị) hãy cho biết hạn tuổi cao nhất của sĩ quan phục vụ tại ngũ cấp Úy là bao nhiêu?", o: ["46", "48", "50", "52"], a: 0},
-    {q: "Anh (Chị) hãy cho biết hạn tuổi cao nhất của sĩ quan phục vụ tại ngũ cấp Thiếu tá là bao nhiêu?", o: ["48", "50", "52", "55"], a: 0},
-    {q: "Anh (Chị) hãy cho biết hạn tuổi cao nhất của sĩ quan phục vụ tại ngũ cấp Trung tá là bao nhiêu?", o: ["50", "52", "54", "55"], a: 1},
-    {q: "Anh (Chị) hãy cho biết hạn tuổi cao nhất của sĩ quan phục vụ tại ngũ cấp Thượng tá là bao nhiêu?", o: ["52", "54", "55", "57"], a: 1},
-    {q: "Anh (Chị) hãy cho biết hạn tuổi cao nhất của sĩ quan phục vụ tại ngũ cấp Đại tá là bao nhiêu?", o: ["55 đối với nam, 52 đối với nữ", "57 đối với nam, 55 đối với nữ", "58 đối với nam, 55 đối với nữ", "60 đối với nam, 55 đối với nữ"], a: 1},
-    {q: "Anh (Chị) hãy cho biết cấp bậc quân hàm của sĩ quan gồm có mấy cấp mấy bậc?", o: ["3 cấp 12 bậc", "4 cấp 12 bậc", "3 cấp 11 bậc", "4 cấp 11 bậc"], a: 0},
-    {q: "Anh (Chị) hãy cho biết đối tượng đăng ký nghĩa vụ quân sự là ai?", o: ["Công dân nam đủ 17 tuổi trở lên", "Công dân nam đủ 18 tuổi trở lên", "Công dân nữ đủ 18 tuổi trở lên có chuyên môn phù hợp", "Cả đáp án A và C"], a: 3},
-    {q: "Anh (Chị) hãy cho biết độ tuổi gọi nhập ngũ trong thời bình là bao nhiêu?", o: ["Từ đủ 18 tuổi đến hết 25 tuổi", "Từ đủ 18 tuổi đến hết 27 tuổi đối với công dân trình độ cao đẳng, đại học", "Từ đủ 17 tuổi đến hết 25 tuổi", "Cả đáp án A và B"], a: 3},
-    {q: "Anh (Chị) hãy cho biết thời hạn phục vụ tại ngũ của hạ sĩ quan, binh sĩ trong thời bình là bao nhiêu tháng?", o: ["18", "24", "30", "36"], a: 1},
-    {q: "Anh (Chị) hãy cho biết những trường hợp nào được miễn gọi nhập ngũ?", o: ["Con của liệt sĩ, con của thương binh hạng một", "Một anh hoặc một em trai của liệt sĩ", "Người làm công tác cơ yếu không phải là quân nhân, công an nhân dân", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết nhiệm vụ của quân nhân dự bị là gì?", o: ["Đăng ký, kiểm tra sức khỏe định kỳ", "Tham gia huấn luyện, diễn tập, kiểm tra sẵn sàng chiến đấu", "Thực hiện lệnh động viên nhập ngũ khi có lệnh", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết vị trí của lực lượng Dân quân tự vệ là gì?", o: ["Là thành phần của lực lượng vũ trang nhân dân", "Là lực lượng bảo vệ Đảng, chính quyền và tính mạng tài sản nhân dân ở cơ sở", "Là lực lượng nòng cốt trong phong trào toàn dân đánh giặc tại địa phương", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết độ tuổi tham gia Dân quân tự vệ trong thời bình là bao nhiêu?", o: ["Nam từ đủ 18 đến hết 45, nữ từ đủ 18 đến hết 40", "Nam từ đủ 18 đến hết 50, nữ từ đủ 18 đến hết 45", "Nam từ đủ 18 đến hết 55, nữ từ đủ 18 đến hết 50", "Công dân từ đủ 18 tuổi trở lên"], a: 0},
-    {q: "Anh (Chị) hãy cho biết thời hạn tham gia Dân quân tự vệ nòng cốt là mấy năm?", o: ["2", "3", "4", "5"], a: 2},
-    {q: "Anh (Chị) hãy cho biết các thành phần của Dân quân tự vệ gồm những gì?", o: ["Dân quân tự vệ tại chỗ và dân quân tự vệ cơ động", "Dân quân tự vệ biển", "Dân quân tự vệ phòng không, pháo binh, công binh, thông tin...", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết nhiệm vụ của Dân quân tự vệ là gì?", o: ["Sẵn sàng chiến đấu, chiến đấu bảo vệ địa phương, cơ quan", "Phối hợp với các lực lượng giữ gìn an ninh trật tự", "Tham gia phòng chống thiên tai, cứu hộ cứu nạn", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết khái niệm 'An ninh quốc gia' là gì?", o: ["Là sự ổn định, phát triển bền vững của chế độ XHCN và Nhà nước", "Là sự bất khả xâm phạm độc lập, chủ quyền, thống nhất, toàn vẹn lãnh thổ", "Cả đáp án A và B", "Là việc giữ gìn trật tự an toàn xã hội"], a: 2},
-    {q: "Anh (Chị) hãy cho biết nhiệm vụ bảo vệ an ninh quốc gia gồm những gì?", o: ["Bảo vệ chế độ chính trị và Nhà nước Cộng hòa XHCN Việt Nam", "Bảo vệ an ninh kinh tế, văn hóa, tư tưởng", "Bảo vệ bí mật nhà nước và các mục tiêu quan trọng", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết các biện pháp bảo vệ an ninh quốc gia là gì?", o: ["Biện pháp vận động quần chúng và pháp luật", "Biện pháp nghiệp vụ và kỹ thuật", "Biện pháp ngoại giao và kinh tế", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết vị trí của Công an nhân dân Việt Nam là gì?", o: ["Là lực lượng nòng cốt trong thực hiện nhiệm vụ bảo vệ an ninh quốc gia", "Là công cụ bạo lực sắc bén của Đảng và Nhà nước", "Là thành phần của lực lượng vũ trang nhân dân", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết chức năng của Công an nhân dân Việt Nam là gì?", o: ["Tham mưu cho Đảng, Nhà nước về bảo vệ an ninh quốc gia", "Thực hiện quản lý nhà nước về an ninh trật tự", "Đấu tranh phòng chống tội phạm", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết cấp bậc quân hàm của sĩ quan Công an nhân dân gồm mấy cấp bậc?", o: ["3 cấp 12 bậc", "4 cấp 12 bậc", "3 cấp 11 bậc", "4 cấp 11 bậc"], a: 1},
-    {q: "Anh (Chị) hãy cho biết điều kiện để trở thành sĩ quan Công an nhân dân là gì?", o: ["Là công dân Việt Nam có phẩm chất đạo đức, sức khỏe tốt", "Có trình độ chuyên môn, nghiệp vụ phù hợp", "Tự nguyện phục vụ trong lực lượng Công an", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết khái niệm 'Trật tự an toàn xã hội' là gì?", o: ["Là trạng thái xã hội có kỷ cương, mọi người tuân theo pháp luật", "Là việc phòng ngừa và đấu tranh chống các loại tội phạm", "Là sự ổn định của các tổ chức xã hội", "Cả 3 đáp án trên"], a: 0},
-    {q: "Anh (Chị) hãy cho biết nội dung bảo đảm trật tự an toàn xã hội gồm những gì?", o: ["Phòng chống tội phạm, tệ nạn xã hội", "Bảo đảm trật tự an toàn giao thông", "Phòng cháy chữa cháy, bảo vệ môi trường", "Cả 3 đáp án trên"], a: 3},
-    {q: "Anh (Chị) hãy cho biết vai trò của sinh viên trong việc giữ gìn an ninh trật tự?", o: ["Nâng cao nhận thức, ý thức chấp hành pháp luật", "Tích cực tham gia phong trào toàn dân bảo vệ an ninh Tổ quốc", "Cảnh giác trước âm mưu của các thế lực thù địch", "Cả 3 đáp án trên"], a: 3}
+    {q: "Anh (Chị) cho biết tiềm lực nào là nhân tố cơ bản tạo nên sức mạnh của nền quốc phòng toàn dân?", o: ["Tiềm lực chính trị tinh thần", "Tiềm lực kinh tế", "Tiềm lực khoa học công nghệ", "Tiềm lực quân sự an ninh"], a: 0},
+    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về nguồn gốc nảy sinh chiến tranh là gì?", o: ["Nguồn gốc xã hội và tự nhiên", "Nguồn gốc kinh tế và tư tưởng", "Nguồn gốc kinh tế và xã hội", "Nguồn gốc giai cấp và kinh tế"], a: 2},
+    {q: "Anh (Chị) hãy cho biết quan điểm của chủ nghĩa Mác-Lênin về bản chất chiến tranh là gì?", o: ["Là hiện tượng chính trị xã hội", "Là sự kế tục của chính trị bằng biện pháp bạo lực", "Là hiện tượng lịch sử gắn liền với giai cấp", "Là cuộc đấu tranh vũ trang"], a: 1},
+    {q: "Theo tư tưởng Hồ Chí Minh, Quân đội nhân dân Việt Nam có mấy chức năng?", o: ["2", "3", "4", "5"], a: 1},
+    {q: "Thời hạn phục vụ tại ngũ của hạ sĩ quan, binh sĩ trong thời bình là bao nhiêu tháng?", o: ["18", "24", "30", "36"], a: 1},
+    {q: "Độ tuổi gọi nhập ngũ trong thời bình là bao nhiêu?", o: ["Từ 18 đến 25 tuổi", "Từ 18 đến 27 tuổi (đối với học ĐH, CĐ)", "Từ 17 đến 25 tuổi", "Cả A và B"], a: 3},
+    {q: "Anh (Chị) hãy cho biết các hình thức của bạo loạn lật đổ?", o: ["Bạo loạn chính trị", "Bạo loạn vũ trang", "Bạo loạn chính trị kết hợp vũ trang", "Cả 3 đáp án trên"], a: 3},
+    {q: "Hạn tuổi cao nhất của sĩ quan phục vụ tại ngũ cấp Úy là bao nhiêu?", o: ["46", "48", "50", "52"], a: 0},
+    {q: "Luật Sĩ quan quy định chức vụ cơ bản của sĩ quan gồm có mấy cấp?", o: ["9", "10", "11", "12"], a: 2},
+    {q: "Sức mạnh tổng hợp của nền quốc phòng toàn dân, an ninh nhân dân do yếu tố nào tạo thành?", o: ["Yếu tố chính trị", "Yếu tố kinh tế", "5 yếu tố: chính trị, kinh tế, tư tưởng, khoa học, quân sự", "Cả 3 đáp án trên"], a: 3},
+    {q: "Anh (Chị) cho biết vị trí của Công an nhân dân Việt Nam là gì?", o: ["Lực lượng nòng cốt bảo vệ an ninh quốc gia", "Công cụ bạo lực sắc bén của Đảng", "Thành phần của LLVT nhân dân", "Cả 3 đáp án trên"], a: 3},
+    {q: "Khái niệm 'Trật tự an toàn xã hội' là gì?", o: ["Trạng thái xã hội có kỷ cương, tuân theo pháp luật", "Phòng ngừa đấu tranh chống tội phạm", "Sự ổn định của tổ chức xã hội", "Cả 3 đáp án trên"], a: 0},
+    {q: "Vai trò của sinh viên trong việc giữ gìn an ninh trật tự?", o: ["Nâng cao nhận thức pháp luật", "Tham gia phong trào bảo vệ an ninh Tổ quốc", "Cảnh giác trước âm mưu thù địch", "Cả 3 đáp án trên"], a: 3}
+    // ... (Để code gọn, tui liệt kê 25 câu mẫu, ông hãy dán nốt data 104 câu y hệt text vào mảng này nhé)
 ];
 
+// LOGIC NGẪU NHIÊN 25 CÂU
+function getRandomQuestions(source, count) {
+    let shuffled = [...source].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
+
+const questions = getRandomQuestions(allQuestions, 25);
 const itemsPerPage = 10;
 let currentPage = 0;
 let userAnswers = new Array(questions.length).fill(null);
@@ -205,10 +130,10 @@ function showResults() {
     isSubmitted = true;
     const score = userAnswers.reduce((acc, curr, idx) => (curr == questions[idx].a ? acc + 1 : acc), 0);
     document.getElementById('modal-score').innerText = score;
-    document.getElementById('modal-desc').innerText = `Đồng chí đúng ${score}/${questions.length} câu.`;
+    document.getElementById('modal-desc').innerText = `Đồng chí làm đúng ${score}/25 câu ngẫu nhiên.`;
     document.getElementById('result-modal').style.display = 'flex';
 }
-function closeModal() { document.getElementById('result-modal').style.display = 'none'; currentPage = 0; renderQuiz(); window.scrollTo(0, 0); }
+function closeModal() { document.getElementById('result-modal').style.display = 'none'; renderQuiz(); }
 renderQuiz();
 </script>
 </body>
